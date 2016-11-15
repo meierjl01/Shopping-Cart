@@ -29,3 +29,5 @@ export default Backbone.Model.extend({
     this.set({total});
   }
 });
+
+//rethink they way they work
