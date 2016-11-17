@@ -88,9 +88,24 @@ it('should run the total function when I fire the removeItem function', () => {
 
 
 //total function testing:
+ describe('total function testing', () => {
+
 it('should have a total method', () => {
   expect(cart).to.have.property('total');
   expect(cart.total).to.be.a('function');
 });
 
+it('should throw an error if it doesn\'t get an array', () => {
+  let fn = cart.total.bind(cart, '');
+  expect(fn).to.throw();
+});
+
+it('should calculate the sum of items passed in', () => {
+  var total = cart.total([{name: '', price: 100}])
+  expect(total).to.equal(100);
+  total = cart.total([{name: '', price: 3}, {name: '', price: 0}, {name: '', price: 70}]);
+  expect(total).to.equal(73);
+});
+
+});
 });

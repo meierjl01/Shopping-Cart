@@ -11,7 +11,7 @@ describe('cart item component', () => {
 
   beforeEach(() => {
     spy = spyOnComponentMethod(CartItem, 'handleRemove');
-    cartItem = shallow(<CartItem key={1} item={'item'} location={1} />);
+    cartItem = shallow(<CartItem key={1} data={{}} location={1} />);
   });
 
   afterEach(() => {
@@ -30,14 +30,15 @@ describe('cart item component', () => {
     expect(cartItem.children('button')).to.have.length(1);
   });
 
+//this and the one below it are throwing errors and I can't figure out why. "Method "text" is only meant to be run on a single node"
   it('should display the item\'s name', () => {
-    cartItem.setProps({item:{name: 'sword'}});
-    expect(cartItem.find('name').text()).to.equal('sword');
+    cartItem.setProps({item: {name: 'sword', price: 100}});
+    expect(cartItem.find('.name').text()).to.equal('sword');
   });
 
   it('should display the item\'s price', () => {
-    cartItem.setProps({item:{price: 100}});
-    expect(cartItem.find('price').text()).to.equal('100');
+    cartItem.setProps({item: {name: sword, price: 100}});
+    expect(cartItem.find('.price').text()).to.equal('100');
   });
 
   it('should call the click handler when the button is clicked', () => {

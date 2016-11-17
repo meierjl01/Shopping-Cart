@@ -14,7 +14,6 @@ export default React.createClass({
   },
   handleRemove(e) {
     // console.log(this.props.location);
-    e.preventDefault();
     store.cart.removeItem(this.props.location);
   }
 });
