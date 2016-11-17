@@ -44,8 +44,15 @@ it('should fire the change event when addItem is called', () => {
   let spy = sinon.spy();
   cart.on('change', spy);
   cart.addItem('Jennifer');
-  expect(spy.callCount).to.equal(2);
+  expect(spy.callCount).to.equal(1);
 });
+
+//how to spy on existing items
+it('should run the total function when I fire the addItem function', () => {
+  let spy = sinon.spy(cart, 'total');
+  cart.addItem('Jennifer');
+  expect(spy.callCount).to.equal(1);
+})
 
 
 //removeItem function testing:
@@ -59,9 +66,25 @@ it('should fire the change event when removeItem is called', () => {
   cart.addItem('Jennifer');
   cart.on('change', spy);
   cart.removeItem(0);
-  expect(spy.callCount).to.equal(2);
+  expect(spy.callCount).to.equal(1);
 });
 
+//how to spy on existing items
+it('should run the total function when I fire the removeItem function', () => {
+  let spy = sinon.spy(cart, 'total');
+  cart.removeItem('Jennifer');
+  expect(spy.callCount).to.equal(1);
+})
+
+//pass in testing
+//properties -- different it statements
+//0, negative price
+//shouldnt' let remove items if it's not in the cart -- error or return empty array
+//if going to add to cart, must be in this format (have a price)
+//cart - object, price and name
+//look inside items array for tests also
+//check all when totalling
+//check on updating total
 
 
 //total function testing:
@@ -69,10 +92,5 @@ it('should have a total method', () => {
   expect(cart).to.have.property('total');
   expect(cart.total).to.be.a('function');
 });
-
-
-
-
-//look at how to spy on existing items
 
 });

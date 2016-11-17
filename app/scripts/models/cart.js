@@ -7,8 +7,7 @@ export default Backbone.Model.extend({
   },
   addItem(item) {
     let newItems = this.get('items').concat(item);
-    this.set('items', newItems);
-    this.total();
+    this.set({'items': newItems, 'total': this.total(newItems)});
   },
   removeItem(index) {
     let itemRemove = this.get('items').filter((item, i, arr) =>{
@@ -17,17 +16,14 @@ export default Backbone.Model.extend({
       }
     });
     // console.log(itemRemove)
-    this.set('items', itemRemove);
-    this.total();
+    this.set({'items': itemRemove, 'total': this.total(itemRemove)});
   },
-  total() {
+  total(items) {
     let total = 0;
-    this.get('items').forEach((item) => {
+    items.forEach((item) => {
       console.log(item);
       total += item.price;
     });
-    this.set({total});
+    return total;
   }
 });
-
-//rethink they way they work
